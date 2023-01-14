@@ -9,9 +9,12 @@ using namespace std;
 
 HashWorker::HashWorker(string path2file, unsigned int startPos, unsigned int stopPos, unsigned int segmentSize, int threadID) : m_segmentSize(segmentSize), m_startPos(startPos), m_stopPos(stopPos), m_threadId(threadID)
 {
-    if (startPos > stopPos)
+    if (startPos > stopPos || stopPos == 0)
     {
-        throw "endPos have to be bigger then startPos!";
+        throw invalid_argument("endPos have to be bigger then startPos!");
+    }
+    if(segmentSize == 0){
+        throw invalid_argument("segment size have to be bigger then zero!");
     }
     this->m_segmentStorage = make_unique<char[]>(segmentSize);
     this->m_fileStream = make_unique<fs::ifstream>(path2file, fs::ifstream::in);
