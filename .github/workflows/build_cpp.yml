@@ -36,8 +36,8 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install/Select GCC and G++
-        if: ${{ matrix.os-type == 'ubuntu' }}
-        run: |
+      if: ${{ matrix.os-type == 'ubuntu' }}
+      run: |
           sudo apt-get install -y gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
           echo "CC=/usr/bin/gcc-${{ matrix.gcc }}" >> $GITHUB_ENV
           echo "CXX=/usr/bin/g++-${{ matrix.gcc }}" >> $GITHUB_ENV
